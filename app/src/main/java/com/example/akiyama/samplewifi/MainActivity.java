@@ -6,6 +6,8 @@ import android.net.wifi.WifiManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,25 +28,34 @@ public class MainActivity extends AppCompatActivity {
         // RunTime Permissionチェック
         checkRuntimePermission();
 
-        // WifiManagerのインスタンスを取得
-        WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE);
+        // Start Button
+        Button btnStart = (Button)findViewById(R.id.btn_start);
+        btnStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-        // WiFiステータスが有効であること
-        if (wifiManager.getWifiState() == WifiManager.WIFI_STATE_ENABLED) {
+                // WifiManagerのインスタンスを取得
+                WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE);
 
-            // スキャン開始
-            wifiManager.startScan();
+                // WiFiステータスが有効であること
+                if (wifiManager.getWifiState() == WifiManager.WIFI_STATE_ENABLED) {
 
-            // スキャン結果をリストに取得
-            List<ScanResult> scanResultList = wifiManager.getScanResults();
+                    // スキャン開始
+                    wifiManager.startScan();
 
-            // WifiArrayAdappterにスキャン結果を設定
-            WifiArrayAdapter adapter = new WifiArrayAdapter(this, R.layout.item_wifistatus, scanResultList);
+                    // スキャン結果をリストに取得
+                    List<ScanResult> scanResultList = wifiManager.getScanResults();
 
-            // ListViewにWifiArrayAdapterを設定
-            ListView listView = (ListView) findViewById(R.id.listview);
-            listView.setAdapter(adapter);
-        }
+                    // WifiArrayAdappterにスキャン結果を設定
+                    WifiArrayAdapter adapter = new WifiArrayAdapter(getApplicationContext(), R.layout.item_wifistatus, scanResultList);
+
+                    // ListViewにWifiArrayAdapterを設定
+                    ListView listView = (ListView) findViewById(R.id.listview);
+                    listView.setAdapter(adapter);
+                }
+            }
+        });
+
     }
 
     /**
