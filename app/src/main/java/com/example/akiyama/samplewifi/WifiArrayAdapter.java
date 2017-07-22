@@ -1,6 +1,7 @@
 package com.example.akiyama.samplewifi;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.net.wifi.ScanResult;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
@@ -84,6 +85,13 @@ public class WifiArrayAdapter extends ArrayAdapter {
         tvCapabilities.setText(scanResult.capabilities);
         tvFrequency.setText(String.format("%d", scanResult.frequency));
         tvLevel.setText(Integer.toString(scanResult.level));
+
+        // 色を設定
+        tvSsid.setTextColor(Color.BLUE);
+        tvBssid.setTextColor(Color.BLACK);
+        tvCapabilities.setTextColor(Color.BLACK);
+        tvFrequency.setTextColor(Color.BLACK);
+        tvLevel.setTextColor(Color.BLACK);
 
         return view;
     }
