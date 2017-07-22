@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- ネットワーク名 -->
+    <TextView
+        android:id="@+id/txt_ssid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/str_ssid"
+/>
+
+    <!-- MACアドレス -->
+    <TextView
+        android:id="@+id/txt_bssid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/str_bssid" />
+
+    <!-- 暗号化情報 -->
+    <TextView
+        android:id="@+id/txt_capabilities"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/str_capabilities" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!-- チャンネル周波数(MHz) -->
+        <TextView
+            android:id="@+id/txt_frequency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/str_frequency"
+            android:layout_weight="1"/>
+
+        <!-- 信号レベル(dBm) -->
+        <TextView
+            android:id="@+id/txt_level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/str_level"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+</LinearLayout>

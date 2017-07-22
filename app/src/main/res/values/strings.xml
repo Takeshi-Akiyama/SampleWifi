@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">SampleWifi</string>
+
+    <!-- TextView -->
+    <string name="str_ssid">SSID : </string>
+    <string name="str_bssid">BSSID : </string>
+    <string name="str_capabilities">capabilities : </string>
+    <string name="str_frequency">frequency : </string>
+    <string name="str_level">level : </string>
+
+    <!-- Button -->
+    <string name="str_start">スタート</string>
+    <string name="str_stop">ストップ</string>
 </resources>
