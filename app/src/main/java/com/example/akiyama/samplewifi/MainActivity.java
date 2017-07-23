@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         checkRuntimePermission();
 
         // Start Button
-        Button btnStart = (Button)findViewById(R.id.btn_start);
+        Button btnStart = (Button) findViewById(R.id.btn_start);
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -38,30 +38,24 @@ public class MainActivity extends AppCompatActivity {
                 getWifiList();
             }
         });
+    }
+
+    private void getWifiList() throws Error {
+        // WiFI utils 呼び出し
+        WifiUtils wifiutils = new WifiUtils(getApplicationContext());
+
+        // スキャン結果をリストに取得
+        List<ScanResult> scanResultList = wifiutils.scan();
+
+        // WifiArrayAdappterにスキャン結果を設定
+        WifiArrayAdapter adapter = new WifiArrayAdapter(getApplicationContext(), R.layout.item_wifistatus, scanResultList);
+
+        // ListViewにWifiArrayAdapterを設定
+        ListView listView = (ListView) findViewById(R.id.listview);
+        listView.setAdapter(adapter);
 
     }
 
-    private void getWifiList() {
-        // WifiManagerのインスタンスを取得
-        WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE);
-
-        // WiFiステータスが有効であること
-        if (wifiManager.getWifiState() == WifiManager.WIFI_STATE_ENABLED) {
-
-            // スキャン開始
-            wifiManager.startScan();
-
-            // スキャン結果をリストに取得
-            List<ScanResult> scanResultList = wifiManager.getScanResults();
-
-            // WifiArrayAdappterにスキャン結果を設定
-            WifiArrayAdapter adapter = new WifiArrayAdapter(getApplicationContext(), R.layout.item_wifistatus, scanResultList);
-
-            // ListViewにWifiArrayAdapterを設定
-            ListView listView = (ListView) findViewById(R.id.listview);
-            listView.setAdapter(adapter);
-        }
-    }
 
     /**
      * WiFiを利用するためのRuntimePermissionをチェック
