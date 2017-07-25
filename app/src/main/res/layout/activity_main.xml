@@ -11,21 +11,21 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <!-- Scan表示ボタン -->
+        <!-- WiFiスキャン実行ボタン -->
         <Button
-            android:id="@+id/btn_start"
+            android:id="@+id/btn_scan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/str_start" />
+            android:text="@string/str_scan" />
 
-        <!-- Scan表示ボタン -->
+        <!-- 現在の接続表示 -->
         <Button
-            android:id="@+id/btn_stop"
+            android:id="@+id/btn_show_current_connection"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/str_stop" />
+            android:text="@string/str_show_current_connection" />
 
     </LinearLayout>
 
