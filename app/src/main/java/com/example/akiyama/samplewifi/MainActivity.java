@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void getWifiList() {
+    protected void getWifiList() {
 
         List<ScanResult> scanResults = mWifiUtils.get();
 
