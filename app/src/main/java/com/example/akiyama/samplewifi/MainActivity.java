@@ -38,7 +38,9 @@ public class MainActivity extends AppCompatActivity {
         mWifiUtils = new WifiUtils(this);
 
         // Intent FilterにはWiFiスキャン完了タグを設定
-        registerReceiver(mScanResultsReceiver, new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
+
+         registerReceiver(new WifiBroadcastReceiver(this), new IntentFilter(WifiManager
+                .SCAN_RESULTS_AVAILABLE_ACTION));
 
         // Start Button
         Button btnStart = (Button) findViewById(R.id.btn_start);
@@ -98,29 +100,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
-    private final BroadcastReceiver mScanResultsReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-
-
-            System.out.println("onReceiver呼び出し getAction:"
-                    + intent.getAction()
-                    + " getPackage:"
-                    + intent.getPackage());
-
-            getWifiList();
-
-            // onReceive() は何度も呼ばれるので、
-            // 1度で終了させたい場合はここで unregister する
-            try {
-                unregisterReceiver(this);
-            } catch (IllegalArgumentException e) {
-                // 既に登録解除されている場合
-                // 事前に知るための API は用意されていない
-            }
-        }
-    };
 }
 
 
