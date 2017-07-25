@@ -38,24 +38,43 @@ public class MainActivity extends AppCompatActivity {
         mWifiUtils = new WifiUtils(this);
 
         // Intent FilterにはWiFiスキャン完了タグを設定
-
          registerReceiver(new WifiBroadcastReceiver(this), new IntentFilter(WifiManager
                 .SCAN_RESULTS_AVAILABLE_ACTION));
 
-        // Start Button
-        Button btnStart = (Button) findViewById(R.id.btn_start);
-        btnStart.setOnClickListener(new View.OnClickListener() {
+        // 現在接続WiFIリストを表示するButton
+        Button btnScan = (Button) findViewById(R.id.btn_scan);
+        btnScan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                mWifiUtils.start();
+                // スキャン実行
+                mWifiUtils.startScan();
+            }
+        });
+
+        // 現在接続しているWiFIの情報を表示するButton
+        Button btnCurrentInfo = (Button)findViewById(R.id.btn_show_current_connection);
+        btnCurrentInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // ダイアログ表示
+                showCurrentConnection();
             }
         });
     }
 
+    private void showCurrentConnection() {
+        WifiInfo wifiinfo = mWifiUtils.getCurrentConnection();
+        System.out.println(wifiinfo.getSSID());
+        Toast.makeText(this,wifiinfo.getSSID(),Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * WifiUtilsから取得したリストをリストにセット表示する
+     */
     protected void getWifiList() {
 
-        List<ScanResult> scanResults = mWifiUtils.get();
+        List<ScanResult> scanResults = mWifiUtils.getWifiList();
 
         // WifiArrayAdappterにスキャン結果を設定
         WifiArrayAdapter adapter = new WifiArrayAdapter(getApplicationContext(), R.layout.item_wifistatus,

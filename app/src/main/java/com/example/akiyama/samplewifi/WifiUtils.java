@@ -2,6 +2,7 @@ package com.example.akiyama.samplewifi;
 
 import android.content.Context;
 import android.net.wifi.ScanResult;
+import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.support.annotation.Nullable;
 import android.widget.Toast;
@@ -23,40 +24,44 @@ public class WifiUtils {
         mWifiManager = (WifiManager) mContext.getSystemService(Context.WIFI_SERVICE);
     }
 
-    public void start() {
-        scanStart();
-    }
-
-    public List<ScanResult> get() {
-
-        // Scan 結果取得
-        return getWifiList();
-    }
-
-    private void showWifiStatusError() {
-        Toast.makeText(mContext, "Wifi Scanが有効ではありません", Toast.LENGTH_SHORT).show();
-    }
-
-    private void scanStart() {
-        // スキャン開始
+    /**
+     * WiFiスキャンを実施
+     */
+    public void startScan() {
         mWifiManager.startScan();
     }
 
-    private void scanStop() {
-        // スキャン停止 ではなく特定の WiFi
-        mWifiManager.disconnect();
-    }
 
-    private List<ScanResult> getWifiList() {
-        // 結果を取得し返す
+    /**
+     * WiFi接続先リストを取得
+     * @return List<ScanResult>
+     */
+    public List<ScanResult> getWifiList() {
+
+        // Scan 結果取得
         return mWifiManager.getScanResults();
     }
+
+    /**
+     * 現在接続しているWifiの情報を取得
+     *
+     * @return WifiInfo
+     */
+    public WifiInfo getCurrentConnection() {
+        return mWifiManager.getConnectionInfo();
+    }
+
+    /**
+     * WiFiが有効でないことをToast表示
+     */
+    public void showWifiError() {
+        Toast.makeText(mContext, "Wifiが有効ではありません", Toast.LENGTH_SHORT).show();
+    }
+
 
     private boolean checkWifiStatus() {
         return mWifiManager.getWifiState() == WifiManager.WIFI_STATE_ENABLED;
     }
-
-    // 現在のWiFiを表示
 
 
 }
