@@ -37,9 +37,7 @@ public class MainActivity extends AppCompatActivity {
         // WiFI utils 呼び出し
         mWifiUtils = new WifiUtils(this);
 
-        // Intent Filterには独自定義したタグを使用
-        // android.net.wifi.WIFI_STATE_CHANGED のは場合に他のアプリやOS起因によるScanが行われた場合に
-        // registerReceiverが起動しボタンを押していないのに結果を取得していた
+        // Intent FilterにはWiFiスキャン完了タグを設定
         registerReceiver(mScanResultsReceiver, new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
 
         // Start Button
@@ -64,7 +62,6 @@ public class MainActivity extends AppCompatActivity {
         // ListViewにWifiArrayAdapterを設定
         ListView listView = (ListView) findViewById(R.id.listview);
         listView.setAdapter(adapter);
-
     }
 
 
