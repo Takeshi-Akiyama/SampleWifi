@@ -9,6 +9,6 @@
     <string name="str_level">level : </string>
 
     <!-- Button -->
-    <string name="str_start">スタート</string>
-    <string name="str_stop">ストップ</string>
+    <string name="str_scan">WiFiスキャン実行</string>
+    <string name="str_show_current_connection">現在の接続表示</string>
 </resources>
