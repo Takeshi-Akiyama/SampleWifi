@@ -20,18 +20,14 @@ public class WifiUtils {
     public WifiUtils(Context context) {
         mContext = context;
         // WifiManagerのインスタンスを取得
-        mWifiManager = (WifiManager) mContext.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+        mWifiManager = (WifiManager) mContext.getSystemService(Context.WIFI_SERVICE);
     }
 
-    public List<ScanResult> scan() {
-
-        // Wifi Scan が無効の時はToastで注意喚起する
-        if (!checkWifiStatus()) {
-            showWifiStatusError();
-        }
-        // Scan 開始
+    public void start() {
         scanStart();
-        //scanStop();
+    }
+
+    public List<ScanResult> get() {
 
         // Scan 結果取得
         return getWifiList();
@@ -59,4 +55,8 @@ public class WifiUtils {
     private boolean checkWifiStatus() {
         return mWifiManager.getWifiState() == WifiManager.WIFI_STATE_ENABLED;
     }
+
+    // 現在のWiFiを表示
+
+
 }
